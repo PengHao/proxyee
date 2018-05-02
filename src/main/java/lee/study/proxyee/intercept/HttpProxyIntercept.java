@@ -7,6 +7,16 @@ import io.netty.handler.codec.http.HttpResponse;
 
 public class HttpProxyIntercept {
 
+  public HttpProxyIntercept() {
+
+  }
+
+  private String interceptHost;
+
+  public HttpProxyIntercept(String interceptHost) {
+
+  }
+
   /**
    * 拦截代理服务器到目标服务器的请求头
    */

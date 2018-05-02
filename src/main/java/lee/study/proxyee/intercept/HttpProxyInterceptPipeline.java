@@ -22,6 +22,16 @@ public class HttpProxyInterceptPipeline implements Iterable<HttpProxyIntercept> 
   private RequestProto requestProto;
   private HttpRequest httpRequest;
   private HttpResponse httpResponse;
+  private String host;
+  private Integer port;
+
+  public String getHost() {
+    return host;
+  }
+
+  public Integer getPort() {
+    return port;
+  }
 
   public HttpRequest getHttpRequest() {
     return httpRequest;
@@ -47,7 +57,9 @@ public class HttpProxyInterceptPipeline implements Iterable<HttpProxyIntercept> 
     this.requestProto = requestProto;
   }
 
-  public HttpProxyInterceptPipeline(HttpProxyIntercept defaultIntercept) {
+  public HttpProxyInterceptPipeline(String host, Integer port, HttpProxyIntercept defaultIntercept) {
+    this.host = host;
+    this.port = port;
     this.intercepts = new LinkedList<>();
     this.defaultIntercept = defaultIntercept;
     this.intercepts.add(defaultIntercept);

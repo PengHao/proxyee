@@ -192,7 +192,7 @@ public class HttpProxyServerHandle extends ChannelInboundHandlerAdapter {
   }
 
   private HttpProxyInterceptPipeline buildPiepeline() {
-    HttpProxyInterceptPipeline interceptPipeline = new HttpProxyInterceptPipeline(
+    HttpProxyInterceptPipeline interceptPipeline = new HttpProxyInterceptPipeline( host, port,
         new HttpProxyIntercept() {
           @Override
           public void beforeRequest(Channel clientChannel, HttpRequest httpRequest,

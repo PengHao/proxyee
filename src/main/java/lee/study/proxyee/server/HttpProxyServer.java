@@ -7,6 +7,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.http.HttpContent;
 import io.netty.handler.codec.http.HttpRequest;
 import io.netty.handler.codec.http.HttpResponse;
 import io.netty.handler.codec.http.HttpResponseStatus;
@@ -173,6 +174,13 @@ public class HttpProxyServer {
               }
 
               @Override
+              public void beforeRequest(Channel clientChannel, HttpContent httpContent,
+                                        HttpProxyInterceptPipeline pipeline)
+                  throws Exception {
+                super.beforeRequest(clientChannel, httpContent, pipeline);
+              }
+
+              @Override
               public void afterResponse(Channel clientChannel, Channel proxyChannel,
                   HttpResponse httpResponse, HttpProxyInterceptPipeline pipeline) throws Exception {
 
@@ -181,6 +189,14 @@ public class HttpProxyServer {
                 //转到下一个拦截器处理
                 pipeline.afterResponse(clientChannel, proxyChannel, httpResponse);
               }
+
+              @Override
+              public void afterResponse(Channel clientChannel, Channel proxyChannel, HttpContent httpContent,
+                                        HttpProxyInterceptPipeline pipeline) throws Exception {
+                super.afterResponse(clientChannel, proxyChannel, httpContent, pipeline);
+              }
+
+
             });
           }
         })
