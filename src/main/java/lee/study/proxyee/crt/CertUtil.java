@@ -40,6 +40,10 @@ import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 
 public class CertUtil {
 
+  public static void log(String format, Object... objects) {
+    System.out.print(String.format(format, objects) + "\r\n");
+  }
+
   private static KeyFactory keyFactory = null;
 
   static {
